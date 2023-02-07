@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body>
+    <div class="container-fluid">
+        <header>
+            <%- include('../partials/header'); %>
+        </header>
+        <main class="container-fluid">
+            <!-- Formulario de registro -->
+            <section class="card rounded-3">
+                <div class="row">
+                    <!-- Apartado formulario -->
+                    <div class="col">
+                        <form action="">
+                            <h1>Regístrate</h1>
+                            <div class="form-outline mb-4">
+                                <input type="text" id="nombre" class="form-control" placeholder="Nombre" />
+                                <label class="form-label" for="nombre">Nombre</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="text" id="apellidos" class="form-control" placeholder="Apellidos" />
+                                <label class="form-label" for="apellidos">Apellidos</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="email" id="email" class="form-control" placeholder="Correo electrónico" />
+                                <label class="form-label" for="email">Email</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="text" id="telefono" class="form-control" placeholder="Número de teléfono" />
+                                <label class="form-label" for="telefono">Teléfono</label>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Apartado información -->
+                    <div class="col">
+                        <h1>Mi Pista Ya</h1>
+                        <p>¿Te gusta practicar deporte pero no tienes dónde?
+                            En nuestro centro podrás encontrar la solución.
+                            Solo tienes que registrarte y hacer la reserva de la pista que más te guste.
+                            Ponemos a tu disposición equipamiento para el deporte que vayas a practicar.
+                            No esperes más y apúntante a la aventura.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="text-center border-top pt-2">
+            <%- include('../partials/footer'); %>
+        </footer>
+    </div>
+</body>
+</html>
