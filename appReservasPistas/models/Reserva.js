@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+// Documentos referenciados
 const Usuario = require('../models/Usuario.js');
 const Pista = require('../models/Pista.js');
+// Modelado de datos para Reservas
 const ReservaSchema = new Schema({
     fecha_hora_registro: {
         type: Date,
