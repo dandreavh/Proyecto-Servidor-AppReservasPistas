@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose')
-const Reserva = require('../models/Reserva')
-const db = mongoose.connection;
+var express = require('express');
+var router = express.Router();
+/* var mongoose = require('mongoose');
+var Reserva = require('../models/Reserva');
+var db = mongoose.connection; */
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
