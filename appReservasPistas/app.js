@@ -1,26 +1,26 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 require('dotenv').config();
 
-// Enrutado
-const indexRouter = require('./routes/index');
-const usuariosRouter = require('./routes/usuarios');
-const reservasRouter = require('./routes/reservas');
-const pistasRouter = require('./routes/pistas');
-const equipamientosRouter = require('./routes/equipamientos');
-
 // Base de datos
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.DB_URI,)
   .then(() => console.log('connection successful'))
   .catch((err) => console.error(err));
-mongoose.connection;
+//mongoose.connection;
 
-const app = express();
+// Enrutado
+var indexRouter = require('./routes/index');
+var usuariosRouter = require('./routes/usuarios');
+var reservasRouter = require('./routes/reservas');
+var pistasRouter = require('./routes/pistas');
+var equipamientosRouter = require('./routes/equipamientos');
+
+var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -29,7 +29,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);

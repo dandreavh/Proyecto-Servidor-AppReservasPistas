@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+//var Schema = mongoose.Schema;
 // Para la encriptación del password
-const bcrypt = require('bcryptjs');
-const SALT_WORK_FACTOR = 10;
+var bcrypt = require('bcryptjs');
+var SALT_WORK_FACTOR = 10;
 // Modelado de datos para Usuarios
-const UsuarioSchema = new Schema({
+var UsuarioSchema = new Schema({
     dni: {
         type: String,
         required: true,
@@ -59,7 +59,7 @@ const UsuarioSchema = new Schema({
 });
 
 UsuarioSchema.pre('save', function(next) {
-    let usuario = this;
+    var usuario = this;
     // solo aplica una función hash al password si ha sido modificado (o es nuevo)
     if (!usuario.isModified('password ')) return next();
     // genera la salt
