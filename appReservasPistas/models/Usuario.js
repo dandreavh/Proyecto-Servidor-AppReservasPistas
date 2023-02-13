@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 //var Schema = mongoose.Schema;
 // Para la encriptación del password
-var bcrypt = require('bcryptjs');
+//var bcrypt = require('bcryptjs');
 var SALT_WORK_FACTOR = 10;
 // Modelado de datos para Usuarios
-var UsuarioSchema = new Schema({
+var UsuarioSchema = new mongoose.Schema({
     dni: {
         type: String,
         required: true,
@@ -53,7 +53,7 @@ var UsuarioSchema = new Schema({
     },
     rol: {
         type: String,
-        enum: ['administrados', 'deportista'],
+        enum: ['administrador', 'deportista'],
         default: 'deportista'
     }
 });
