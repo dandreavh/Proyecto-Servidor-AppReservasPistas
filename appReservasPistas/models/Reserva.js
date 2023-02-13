@@ -18,9 +18,13 @@ var ReservaSchema = new Schema({
         required: true,
         default: 1
     },
-    pago: {
+    precio: {
         type: Number,
         required: true,
+    },
+    pagada: {
+        type: Boolean,
+        default: false
     },
     comentarios: {
         type: String,

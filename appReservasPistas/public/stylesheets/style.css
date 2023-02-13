@@ -1,8 +1,20 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+/* 
+CÓDIGO DE COLORES
 
-a {
-  color: #00B7FF;
+Azul --> #5CE1E6
+Morado -->  #5E17EB
+
+*/
+
+.bg-azul{
+  background-color: #5CE1E6;
+}
+.bg-morado{
+  background-color: #5E17EB;
+}
+.txt-azul{
+  color: #5CE1E6;
+}
+.txt-morado{
+  color: #5E17EB;
 }
