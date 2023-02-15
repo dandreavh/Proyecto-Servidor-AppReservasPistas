@@ -4,10 +4,11 @@ var mongoose = require('mongoose');
 var Usuario = require('../models/Usuario.js');
 var Pista = require('../models/Pista.js');
 // Modelado de datos para Reservas
-var ReservaSchema = new Schema({
+var ReservaSchema = new mongoose.Schema({
     fecha_hora_registro: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        required: true
     },
     fecha_hora_reservada: {
         type: Date,
@@ -30,12 +31,12 @@ var ReservaSchema = new Schema({
         type: String,
     },
     titular_reserva: [{
-        type: Schema.ObjectId,
+        type: mongoose.Schema.ObjectId,
         ref: 'Usuario',
         default: null
     }],
     pista_reservada: [{
-        type: Schema.ObjectId,
+        type: mongoose.Schema.ObjectId,
         ref: 'Pista',
         default: null
     }],
