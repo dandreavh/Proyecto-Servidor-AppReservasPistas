@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 //var Schema = mongoose.Schema;
 // Para la encriptación del password
-//var bcrypt = require('bcryptjs');
-var SALT_WORK_FACTOR = 10;
+/* var bcrypt = require('bcryptjs');
+var SALT_WORK_FACTOR = 10; */
 // Modelado de datos para Usuarios
 var UsuarioSchema = new mongoose.Schema({
     dni: {
@@ -35,14 +35,14 @@ var UsuarioSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // quizá se puede tratar como un documento embebido?
     direccion: {
         type: String,
         required: true
     },
     fecha_registro: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        required: true
     },
     fecha_nacimiento: {
         type: Date,
@@ -58,10 +58,10 @@ var UsuarioSchema = new mongoose.Schema({
     }
 });
 
-UsuarioSchema.pre('save', function(next) {
+/* UsuarioSchema.pre('save', function(next) {
     var usuario = this;
     // solo aplica una función hash al password si ha sido modificado (o es nuevo)
-    if (!usuario.isModified('password ')) return next();
+    if (!usuario.isModified('password')) return next();
     // genera la salt
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
     if (err) return next(err);
@@ -80,5 +80,5 @@ UsuarioSchema.pre('save', function(next) {
     if (err) return cb(err);
     cb(null, isMatch);
     });
-    };
+    }; */
     module.exports = mongoose.model('Usuario', UsuarioSchema);
