@@ -7,17 +7,26 @@ var db = mongoose.connection;
 // GET del listado de usuarios ordenados por fecha de creación y sin mostrar el objectID
 router.get('/', function(req, res, next) {
   Usuario.find({_id:0}).sort('-creationdate').populate('usuario').exec(function(err, usuarios) {
-  if (err) res.status(500).send(err);
-  else res.status(200).json(usuarios);
+    if (err) res.status(500).send(err);
+    else res.status(200).json(usuarios);
   });
 });
 
 // GET de un usuario por su ID
 router.get('/:id', function(req, res, next) {
   User.findById(req.params.id, function(err, userinfo) {
-  if (err) res.status(500).send(err);
-  else res.status(200).json(userinfo);
+    if (err) res.status(500).send(err);
+    else res.status(200).json(userinfo);
   });
 });
+
+// POST de un nuevo usuario
+router.post('/', function(req, res, next) {
+  User.create(req.body, function(err, userinfo) {
+    if (err) res.status(500).send(err);
+    else res.sendStatus(200);
+  });
+});
+  
 
 module.exports = router;
