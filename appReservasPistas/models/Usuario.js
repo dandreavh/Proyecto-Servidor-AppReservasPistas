@@ -61,7 +61,7 @@ var UsuarioSchema = new mongoose.Schema({
 UsuarioSchema.pre('save', function(next) {
     var usuario = this;
     // solo aplica una función hash al password si ha sido modificado (o es nuevo)
-    if (!usuario.isModified('password ')) return next();
+    if (!usuario.isModified('password')) return next();
     // genera la salt
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
     if (err) return next(err);
