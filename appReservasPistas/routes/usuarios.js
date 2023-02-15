@@ -31,7 +31,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 // GET: Listar solo los usuarios por su rol
-router.get('/rol', function(req, res, next) {
+router.get('/all', function(req, res, next) {
   let user_rol = req.query.rol;
   let query = Usuario.find({rol:user_rol}).select({"_id": 0, "__v":0});
   query.exec(function(err, datosUsuario){
