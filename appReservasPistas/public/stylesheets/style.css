@@ -7,14 +7,14 @@ Morado -->  #5E17EB
 */
 
 .bg-azul{
-  background-color: #5CE1E6;
+  background-color: #5CE1E6 !important;
 }
 .bg-morado{
-  background-color: #5E17EB;
+  background-color: #5E17EB !important;
 }
 .txt-azul{
-  color: #5CE1E6;
+  color: #5CE1E6 !important;
 }
 .txt-morado{
-  color: #5E17EB;
+  color: #5E17EB !important;
 }
