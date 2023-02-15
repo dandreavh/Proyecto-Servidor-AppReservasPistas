@@ -18,3 +18,23 @@ Morado -->  #5E17EB
 .txt-morado{
   color: #5E17EB !important;
 }
+
+.bg-image-modal {
+  background-size: cover;
+  background-position: center;
+}
+
+.login-heading {
+  font-weight: 300;
+}
+
+.btn-login {
+  font-size: 0.5rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
+#modalWidth{
+  max-width: 50em !important;
+}
+
