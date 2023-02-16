@@ -9,17 +9,17 @@ var db = mongoose.connection;
 // GET: Listar reservas ordenadas por fecha de registro, con el nombre y apellido del titular de la reserva y el tipo de pista con su suelo
 router.get('/', function(req, res, next) {
   Reserva.find()
-  .sort('-fecha_hora_registro')
   .populate(
     [{
-        path: 'usuarioID',
+        path: 'titular_reserva',
         model: 'Usuario',
-        select: '-_id nombre apellidos'
+        select: '_id nombre apellidos'
     }, {
-        path: 'PistaID',
+        path: 'pista_reservada',
         model: 'Pista',
         select: '-_id tipo tipoSuelo'
     }])
+  .sort('-fecha_hora_registro')
   .exec(function(err, reservas) {
     if (err) res.status(500).send(err);
     else res.status(200).json(reservas);
@@ -31,11 +31,11 @@ router.get('/find/:id', function(req, res, next) {
   let query = Reserva.findById(req.params.id).select({"_id": 0});
   query.populate(
     [{
-        path: 'usuarioID',
+        path: 'titular_reserva',
         model: 'Usuario',
         select: '-_id nombre apellidos'
     }, {
-        path: 'PistaID',
+        path: 'pista_reservada',
         model: 'Pista',
         select: '-_id tipo tipoSuelo'
     }])
@@ -47,62 +47,60 @@ router.get('/find/:id', function(req, res, next) {
 
 // GET: Listar solo las reservas por su estado de pago
 router.get("/estado", function(req, res, next) {
-  console.log(req.query);
   let estado = req.query.pagada;
   let query = Reserva.find({pagada:estado}).select({"_id": 0});
   query.populate(
     [{
-        path: 'usuarioID',
+        path: 'titular_reserva',
         model: 'Usuario',
         select: '-_id nombre apellidos'
     }, {
-        path: 'PistaID',
+        path: 'pista_reservada',
         model: 'Pista',
         select: '-_id tipo tipoSuelo'
     }])
-    .exec(function(err, datosReserva){
+    .exec(function(err, datosReservas){
     if (err) res.status(500).send(err);
-    else res.status(200).json(datosReserva);
+    else res.status(200).json(datosReservas);
   });
 });
 
 // GET: Listar reservas para una pista concreta
-router.get("/find/pista/:id", function(req, res, next) {
-  console.log(req.query);
-  let query = Reserva.findOne({pista_reservada:req.params.id});
+router.get("/pista/:id", function(req, res, next) {
+  let query = Reserva.find({pista_reservada:req.params.id});
   query.populate(
     [{
-        path: 'usuarioID',
+        path: 'titular_reserva',
         model: 'Usuario',
         select: '-_id nombre apellidos email dni'
     }, {
-        path: 'PistaID',
+        path: 'pista_reservada',
         model: 'Pista',
         select: '-_id tipo tipoSuelo'
     }])
-    .exec(function(err, datosReserva){
+    .exec(function(err, datosReservas){
     if (err) res.status(500).send(err);
-    else res.status(200).json(datosReserva);
+    else res.status(200).json(datosReservas);
   });
 });
 
 // GET: Listar reservas de un usuario
-router.get("/find/usuario", function(req, res, next) {
+router.get("/find", function(req, res, next) {
   let user = req.query.titular_reserva;
   let query = Reserva.find({titular_reserva:user});
   query.populate(
     [{
-        path: 'usuarioID',
+        path: 'titular_reserva',
         model: 'Usuario',
-        select: '-_id nombre apellidos email dni'
+        select: '-_id nombre apellidos'
     }, {
-        path: 'PistaID',
+        path: 'pista_reservada',
         model: 'Pista',
         select: '-_id tipo tipoSuelo'
     }])
-    .exec(function(err, datosReserva){
+    .exec(function(err, datosReservas){
     if (err) res.status(500).send(err);
-    else res.status(200).json(datosReserva);
+    else res.status(200).json(datosReservas);
   });
 });
 

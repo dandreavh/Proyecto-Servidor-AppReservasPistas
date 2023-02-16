@@ -23,7 +23,6 @@ router.get('/find/:id', function(req, res, next) {
 
 // GET: Listar solo los usuarios por su rol
 router.get("/all", function(req, res, next) {
-  console.log(req.query);
   let user_rol = req.query.rol;
   let query = Usuario.find({rol:user_rol}).select({"_id": 0, "__v":0});
   query.exec(function(err, datosUsuario){
@@ -35,7 +34,6 @@ router.get("/all", function(req, res, next) {
 // POST: Crear un nuevo usuario
 router.post('/', function(req, res, next) {
   Usuario.create(req.body, function(err, usuario) {
-    console.log(req.body)
     if (err) res.status(500).send(err);
     else res.status(200).send({msg:"Usuario creado correctamente", "usuario": usuario});
   });
@@ -44,12 +42,18 @@ router.post('/', function(req, res, next) {
 // POST: Logar usuario
 router.post('/login', function(req, res, next) {
   Usuario.findOne({ email: req.body.email }, function(err, user) {
-    if (err) res.status(500).send(err);
+    if (err) res.status(500).send('¡Error comprobando el usuario!');
+    // Si el usuario existe...
     if (user != null) {
-      if(user.password == req.body.password){
-        res.status(200).send({ message: 'Bienvenido/a, '+user.nombre});
-      }else res.status(200).send({ message: 'Algún dato es erróneo' });
-    } else res.status(401).send({ message: 'El usuario no existe'});
+        user.comparePassword(req.body.password, function(err, isMatch) {
+            if (err) return next(err);
+            // Si el password es correcto...
+            if (isMatch)
+                res.status(200).send({ message:'Bienvenido/a, '+user.nombre});
+            else
+                res.status(200).send({ message: 'Algún dato es erróneo' });
+        });
+    } else res.status(401).send({ message: 'El usuario no existe' });
   });
 });  
 
