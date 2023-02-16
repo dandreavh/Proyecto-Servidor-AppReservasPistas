@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-//var Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 // Para la encriptación del password
-/* var bcrypt = require('bcryptjs');
-var SALT_WORK_FACTOR = 10; */
+var bcrypt = require('bcryptjs');
+var SALT_WORK_FACTOR = 10;
 // Modelado de datos para Usuarios
 var UsuarioSchema = new mongoose.Schema({
     dni: {
@@ -58,7 +58,7 @@ var UsuarioSchema = new mongoose.Schema({
     }
 });
 
-/* UsuarioSchema.pre('save', function(next) {
+UsuarioSchema.pre('save', function(next) {
     var usuario = this;
     // solo aplica una función hash al password si ha sido modificado (o es nuevo)
     if (!usuario.isModified('password')) return next();
@@ -80,5 +80,5 @@ var UsuarioSchema = new mongoose.Schema({
     if (err) return cb(err);
     cb(null, isMatch);
     });
-    }; */
+    };
     module.exports = mongoose.model('Usuario', UsuarioSchema);

@@ -31,12 +31,12 @@ var ReservaSchema = new mongoose.Schema({
         type: String,
     },
     titular_reserva: [{
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario',
         default: null
     }],
     pista_reservada: [{
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Pista',
         default: null
     }],
