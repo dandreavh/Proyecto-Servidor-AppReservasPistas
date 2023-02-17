@@ -1,25 +1,28 @@
 var express = require('express');
 var router = express.Router();
-let Pista = ('../models/Pista')
-/* var mongoose = require('mongoose');
-var db = mongoose.connection; */
+var mongoose = require('mongoose')
+var Pista = require('../models/Pista');
+var db = mongoose.connection;
 
 /* GET: Devuelve todas las pistas  */
+
 router.get('/', function (req, res, next) {
-    Pista.find().populate('pista').exec(function (err, pistas) {
+    Pista.find().exec(function (err, pistas) {
         if (err) res.status(500).send(err);
         else res.status(200).json(pistas);
     });
 });
 
-/* GET: Devuelve todas las pistas de una ubicación concreta */
+/* GET: Listar una pista por su id */
 
-router.get('/:id', function (req, res) {
-    Pista.find({
-        'user': req.params.ubicacion
-    }).sort('-ubicacion').populate('pista').exec(function (err, pistas) {
+router.get('/:id', function (req, res, next) {
+    let query = Pista.findById(req.params.id).select({
+        "_id": 0,
+        "__v": 0
+    });
+    query.exec(function (err, datosPista) {
         if (err) res.status(500).send(err);
-        else res.status(200).json(pistas);
+        else res.status(200).json(datosPista);
     });
 });
 
@@ -29,10 +32,11 @@ router.post('/', function (req, res, next) {
     Pista.create(req.body, function (err, pista) {
         console.log(req.body)
         if (err) res.status(500).send(err);
-        else res.status(200).send({
-            msg: "Pista creada correctamente",
-            "Pista": pista
-        });
+        else
+            res.status(200).send({
+                msg: "Pista creada correctamente",
+                Pista: pista
+            });
     });
 });
 
