@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Scripts kit -->
+    <script defer src="/javascripts/logic.js"></script>
     <script src="https://kit.fontawesome.com/7124061660.js" crossorigin="anonymous"></script>
     <!-- Styles -->
     <link rel="stylesheet" href="/stylesheets/style.css">
@@ -28,16 +29,15 @@
                                     <div class="row">
                                         <div class="col-md-11 mx-auto">
                                             <h3 class="login-heading mb-4">¡Bienvenido!</h3>
-
-                                            <form>
+                                            <form method="post" action="/usuarios/login">
                                                 <div class="form-floating mb-3">
                                                     <input type="email" class="form-control" id="floatingInput"
-                                                        placeholder="name@example.com">
+                                                        placeholder="name@example.com" name="email">
                                                     <label for="floatingInput">Dirección de correo</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
                                                     <input type="password" class="form-control" id="floatingPassword"
-                                                        placeholder="Password">
+                                                        placeholder="Password" name="password">
                                                     <label for="floatingPassword">Contraseña</label>
                                                 </div>
 
@@ -128,42 +128,46 @@
                 <div class="row">
                     <!-- Apartado formulario -->
                     <div class="col-sm">
-                        <form action="">
+                        <form method="post" action="/usuarios">
                             <h1 class="text-center mb-4">Regístrate</h1>
                             <div class="d-sm-flex">
                                 <div class="form-floating mb-2 me-2">
-                                    <input type="text" id="nombre" class="form-control" placeholder="Nombre" />
+                                    <input type="text" id="nombre" class="form-control" placeholder="Nombre" name="nombre" />
                                     <label class="form-label" for="nombre">Nombre</label>
                                 </div>
                                 <div class="form-floating mb-2">
-                                    <input type="text" id="apellidos" class="form-control" placeholder="Apellidos" />
+                                    <input type="text" id="apellidos" class="form-control" placeholder="Apellidos" name="apellidos"/>
                                     <label class="form-label" for="apellidos">Apellidos</label>
                                 </div>
                             </div>
                             <div class="form-floating mb-2">
-                                <input type="email" id="email" class="form-control" placeholder="Correo electrónico" />
+                                <input type="email" id="email" class="form-control" placeholder="Correo electrónico" name="email" />
                                 <label class="form-label" for="email">Email</label>
                             </div>
                             <div class="d-sm-flex">
                                 <div class="form-floating mb-2 me-2">
-                                    <input type="text" id="dni" class="form-control" placeholder="DNI" />
+                                    <input type="text" id="dni" class="form-control" placeholder="DNI" name="dni"/>
                                     <label class="form-label" for="dni">DNI</label>
                                 </div>
                                 <div class="form-floating mb-2">
-                                    <input type="text" id="telefono" class="form-control" placeholder="Número de teléfono" />
+                                    <input type="text" id="telefono" class="form-control" placeholder="Número de teléfono" name="telefono" />
                                     <label class="form-label" for="telefono">Teléfono</label>
                                 </div>
                             </div>
                             <div class="form-floating mb-2">
-                                <input type="date" id="nacimiento" class="form-control" placeholder="Fecha de nacimiento" />
-                                <label class="form-label" for="nacimiento">Fecha de nacimiento</label>
+                                <input type="date" id="fecha_nacimiento" class="form-control" placeholder="Fecha de nacimiento" name="fecha_nacimiento"/>
+                                <label class="form-label" for="fecha_nacimiento">Fecha de nacimiento</label>
+                            </div>
+                            <div class="form-floating mb-2">
+                                <input type="text" id="direccion" class="form-control" placeholder="Dirección de residencia" name="direccion" />
+                                <label class="form-label" for="direccion">Dirección</label>
                             </div>
                             <div class="d-sm-flex">
                                 <div class="form-check form-switch mb-2 me-4">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="federado">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="federado" name="federado">
                                     <label class="form-check-label" for="federado">Federado</label>
                                 </div>
-                                <select class="form-select form-select-sm mb-2" aria-label=".form-select-sm">
+                                <select class="form-select form-select-sm mb-2" aria-label=".form-select-sm" id="rol" name="rol">
                                     <option selected>Selecciona un tipo de perfil</option>
                                     <option value="deportista">Usuario deportista</option>
                                     <option value="administrador">Administrador del sistema</option>
@@ -171,7 +175,7 @@
                             </div>
                             <div class="d-sm-flex">
                                 <div class="form-floating mb-2 me-2">
-                                    <input type="password" id="password" class="form-control" placeholder="Contraseña de acceso" />
+                                    <input type="password" id="password" class="form-control" placeholder="Contraseña de acceso" name="password"/>
                                     <label class="form-label" for="password">Contraseña de acceso</label>
                                 </div>
                                 <div class="form-floating mb-4">

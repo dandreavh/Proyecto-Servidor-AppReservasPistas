@@ -49,7 +49,8 @@ var UsuarioSchema = new mongoose.Schema({
         required: true
     },
     federado: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     rol: {
         type: String,
@@ -57,6 +58,7 @@ var UsuarioSchema = new mongoose.Schema({
         default: 'deportista'
     }
 });
+
 
 UsuarioSchema.pre('save', function(next) {
     var usuario = this;
