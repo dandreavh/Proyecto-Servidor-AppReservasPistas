@@ -5,6 +5,7 @@ var Reserva = require('../models/Reserva');
 var Usuario = require('../models/Usuario');
 var Pista = require('../models/Pista');
 var db = mongoose.connection;
+const { body, validationResult } = require('express-validator');
 
 // GET: Listar reservas ordenadas por fecha de registro, con el nombre y apellido del titular de la reserva y el tipo de pista con su suelo
 router.get('/', function(req, res, next) {
@@ -105,11 +106,31 @@ router.get("/find", function(req, res, next) {
 });
 
 // POST: Crear una nueva reserva
-router.post('/', function(req, res, next) {
-  Reserva.create(req.body, function(err, reserva) {
-    if (err) res.status(500).send(err);
-    else res.status(200).send({msg:"Reserva creada correctamente", "reserva": reserva});
-  });
+router.post('/', 
+  // validaciones
+  // el número de participantes debe ser mayor que 1
+  body('participantes').isInt({min:1}).exists().withMessage('El número de participantes debe ser mayor a uno'),
+  // la fecha y hora reservada debe ser requerida y posterior a la fecha actual
+  //body('fecha_hora_reservada').isDate().isAfter(Date.now()).exists().withMessage('La fecha debe ser posterior a la actual'),
+  // el precio debe ser superior a 0
+  body('precio').isInt({min:1}).exists().withMessage('El precio debe ser mayor a uno'),
+  // el campo de comentario debe tener como máximo 2000 caracteres
+  body('comentarios').isLength({ max: 300}).withMessage('Máximo 300 caracteres permitidos en los comentarios'),
+  // el campo del titular de la reserva debe ser requerido y de tipo objeto id de mongo
+  body('titular_reserva').isMongoId().exists().withMessage('Debe ser el ObjectId del titular'),
+  // el campo de la pista reservada debe ser requerido y de tipo objeto id de mongo
+  body('pista_reservada').isMongoId().exists().withMessage('Debe ser el ObjectId de la pista'),
+
+  function(req, res, next) {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    Reserva.create(req.body, function(err, reserva) {
+      if (err) res.status(500).send(err);
+      else res.status(200).send({msg:"Reserva creada correctamente", "reserva": reserva});
+    });
 });
 
 // PUT: Actualizar una reserva por su ID
