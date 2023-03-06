@@ -7,6 +7,9 @@ const PistaSchema = new Schema({
         enum: ['Balonmano','Pádel','Hockey','Fútbol sala','Fútbol 11','Fútbol 7','Tenis'],
         required: true
     },
+    nombre: {
+        type: String
+    },
     aforo: {
         type: Number,
         required: true
