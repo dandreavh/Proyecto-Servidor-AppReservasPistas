@@ -111,7 +111,7 @@ router.post('/',
   // el número de participantes debe ser mayor que 1
   body('participantes').isInt({min:1}).exists().withMessage('El número de participantes debe ser mayor a uno'),
   // la fecha y hora reservada debe ser requerida y posterior a la fecha actual
-  //body('fecha_hora_reservada').isDate().isAfter(Date.now()).exists().withMessage('La fecha debe ser posterior a la actual'),
+  body('fecha_hora_reservada').isDate().exists().withMessage('La fecha y hora reservada debe ser correcta'),
   // el precio debe ser superior a 0
   body('precio').isInt({min:1}).exists().withMessage('El precio debe ser mayor a uno'),
   // el campo de comentario debe tener como máximo 2000 caracteres
